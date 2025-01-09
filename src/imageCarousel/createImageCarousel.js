@@ -80,12 +80,9 @@ function createImageCarouselArrows(imageCarouselContent, carouselBlock) {
     });
 
     scrollersMediaQueryStyles(arrows);
-
     scrollRightImageCarouselStyles(rightArrow);
     scrollLeftImageCarouselStyles(leftArrow);
-
     scrollImageCarouselEvents(imageCarouselContent, leftArrow, rightArrow);
-
     createImageCarouselNavigationDots(
         imageCarouselContent,
         leftArrow,
@@ -284,8 +281,18 @@ function imageCarouselNavigationDotsStyles(navigationDots) {
 function imageCarouselNavigationDotsEvents(leftArrow, rightArrow, navigationDots) {
     const dots = navigationDots.querySelectorAll(".dot");
     let viewingDot = 'dot1';
+    let timeoutId;
+
+    timeoutId = setTimeout(() => {
+        rightArrow.dispatchEvent(new Event("click"));
+    }, 5000);
 
     leftArrow.addEventListener("click", () => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            rightArrow.dispatchEvent(new Event("click"));
+        }, 5000);
+        
         const newViewDot = `dot${((parseInt(viewingDot.slice(-1)) - 1) % dots.length) + Math.floor((dots.length + 1 - parseInt(viewingDot.slice(-1))) / dots.length) * dots.length}`;
         
         Object.assign(navigationDots.querySelector(`.${viewingDot}`).style, {
@@ -303,6 +310,11 @@ function imageCarouselNavigationDotsEvents(leftArrow, rightArrow, navigationDots
 
 
     rightArrow.addEventListener("click", () => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            rightArrow.dispatchEvent(new Event("click"));
+        }, 5000);
+
         const newViewDot = `dot${1 + (parseInt(viewingDot.slice(-1)) % dots.length)}`;
 
         Object.assign(navigationDots.querySelector(`.${viewingDot}`).style, {
@@ -317,5 +329,5 @@ function imageCarouselNavigationDotsEvents(leftArrow, rightArrow, navigationDots
 
         viewingDot = newViewDot;
     });
-
 };
+
