@@ -3,6 +3,9 @@
 
 This little project is part of [The Odin Project's JavaScript Path](https://www.theodinproject.com/lessons/node-path-javascript-dynamic-user-interface-interactions).
 
+# Demo
+Check the demo [here](https://amroalshaban.github.io/odin-dropdown-carousel/).
+
 # Screenshots
 ![Dropdown Menu](screenshots/dropdown.PNG)
 ![Image Carousel](screenshots/carousel.PNG)
